@@ -1,0 +1,86 @@
+.plan-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 20px;
+  color: #222;
+}
+
+.plan-page h1 {
+  color: #5c00ff;
+  margin-bottom: 20px;
+}
+
+.balance-section {
+  background-color: #fff7c2;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.plan-info {
+  background-color: #c2f0ff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.invest-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.invest-section input {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.invest-section button {
+  padding: 10px;
+  width: 100%;
+  background-color: #5c00ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.invest-section button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.bottom-nav {
+  margin-top: auto;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-nav button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ffbf00;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}

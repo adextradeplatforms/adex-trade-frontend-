@@ -1,0 +1,46 @@
+.team-page {
+  padding: 20px;
+  background-color: #f0f0f0; /* light background */
+  min-height: 100vh;
+  padding-bottom: 70px; /* space for bottom nav */
+}
+
+.team-header {
+  text-align: center;
+  color: #6a0dad; /* purple */
+  margin-bottom: 20px;
+}
+
+.team-card {
+  background-color: #ffea00; /* yellow card */
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #6a0dad; /* purple background */
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.bottom-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.bottom-nav a.active {
+  color: #ffea00; /* yellow active link */
+}

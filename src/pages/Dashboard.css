@@ -1,0 +1,156 @@
+/* PAGE */
+.dashboard-page {
+  min-height: 100vh;
+  background: #f9f9f9; /* light background */
+  color: #111;
+  padding-bottom: 90px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* HEADER */
+.dashboard-header {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 16px;
+  color: #4f46e5; /* purple */
+}
+
+/* BALANCE */
+.balance-card {
+  background: #fff7d6; /* light yellow */
+  margin: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.balance-amount {
+  font-size: 28px;
+  font-weight: bold;
+  color: #facc15; /* bright yellow */
+}
+
+/* BUTTONS */
+.dashboard-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.dashboard-button {
+  flex: 1;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dashboard-button.recharge {
+  background: #2563eb; /* blue */
+}
+
+.dashboard-button.withdraw {
+  background: #9333ea; /* purple */
+}
+
+/* INVITE */
+.invite-section {
+  background: #f3f4f6; /* very light grey */
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #4f46e5; /* purple border */
+}
+
+.invite-section span {
+  display: block;
+  font-size: 13px;
+  color: #2563eb; /* blue */
+  margin-top: 4px;
+}
+
+/* CRYPTO */
+.crypto-card {
+  background: #fff7d6; /* light yellow */
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.crypto-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb; /* light grey */
+}
+
+.crypto-item:last-child {
+  border-bottom: none;
+}
+
+.loading-text {
+  text-align: center;
+  color: #9333ea; /* purple */
+  font-weight: bold;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  border-top: 2px solid #2563eb; /* blue */
+}
+
+.bottom-nav a {
+  color: #6b7280; /* grey for inactive */
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.bottom-nav a.active {
+  color: #facc15; /* yellow */
+}
+/* REFERRER */
+.referrer-card {
+  background: #e0f2fe; /* light blue */
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* TRANSACTIONS */
+.transactions-card {
+  background: #fef3c7; /* light yellow */
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
