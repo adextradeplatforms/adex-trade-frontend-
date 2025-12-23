@@ -14,16 +14,20 @@ export default function Trade() {
     { name: "Alpha Trader", profit: "3%", min: "500 USDT", route: "/plans/alpha" },
   ];
 
-  // Fetch user balance
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const res = await api.get("/user/me");
-        setBalance(res.data.balance);
+        const res = await api.get("/users/me");
+
+        // ✅ support both response styles
+        const data = res.data.user || res.data;
+
+        setBalance(Number(data.balance || 0));
       } catch (err) {
-        console.log(err);
+        console.error("Balance fetch error:", err);
       }
     };
+
     fetchBalance();
   }, []);
 
@@ -31,7 +35,6 @@ export default function Trade() {
     <div className="trade-page">
       <div className="trade-header">Trade Plans</div>
 
-      {/* User Balance */}
       <div className="balance-card">
         <h2>USDT Balance</h2>
         <p>
@@ -45,7 +48,6 @@ export default function Trade() {
         </p>
       </div>
 
-      {/* Plans */}
       <div className="plans-container">
         {plans.map((plan) => (
           <div key={plan.name} className="plan-card">
@@ -62,7 +64,6 @@ export default function Trade() {
         ))}
       </div>
 
-      {/* Bottom Navigator */}
       <div className="bottom-nav">
         <NavLink to="/dashboard" className={({ isActive }) => isActive ? "active" : ""}>
           Home

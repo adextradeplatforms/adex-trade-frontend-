@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios"; // ✅ use your axios instance
 import "./Auth.css";
 
 export default function Login() {
@@ -20,14 +20,15 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
-      localStorage.setItem("token", res.data.token); // store JWT
-      setLoading(false);
-      navigate("/dashboard"); // redirect to Dashboard
+      const res = await api.post("/auth/login", formData); // ✅ FIXED
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
     } catch (err) {
-      setLoading(false);
       setMessage(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,6 +36,7 @@ export default function Login() {
     <div className="auth-container">
       <h2>Login</h2>
       {message && <p className="auth-message">{message}</p>}
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -44,6 +46,7 @@ export default function Login() {
           onChange={handleChange}
           required
         />
+
         <input
           type="password"
           name="password"
@@ -52,12 +55,15 @@ export default function Login() {
           onChange={handleChange}
           required
         />
+
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
+
       <p>
-        Don't have an account? <span onClick={() => navigate("/register")}>Register</span>
+        Don't have an account?{" "}
+        <span onClick={() => navigate("/register")}>Register</span>
       </p>
     </div>
   );

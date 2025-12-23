@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios"; // ✅ use central axios instance
 import "./Auth.css";
 
 export default function Register() {
@@ -21,15 +21,15 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", formData);
-      setMessage(res.data.message);
-      setLoading(false);
-      // Optionally redirect to login after successful registration
-      // navigate("/login");
+      const res = await api.post("/auth/register", formData); // ✅ FIXED
+      setMessage(res.data.message || "Registration successful");
+      // navigate("/login"); // optional
     } catch (err) {
-      setLoading(false);
       setMessage(err.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,6 +37,7 @@ export default function Register() {
     <div className="auth-container">
       <h2>Register</h2>
       {message && <p className="auth-message">{message}</p>}
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -46,6 +47,7 @@ export default function Register() {
           onChange={handleChange}
           required
         />
+
         <input
           type="email"
           name="email"
@@ -54,6 +56,7 @@ export default function Register() {
           onChange={handleChange}
           required
         />
+
         <input
           type="password"
           name="password"
@@ -62,12 +65,15 @@ export default function Register() {
           onChange={handleChange}
           required
         />
+
         <button type="submit" disabled={loading}>
           {loading ? "Registering..." : "Register"}
         </button>
       </form>
+
       <p>
-        Already have an account? <span onClick={() => navigate("/login")}>Login</span>
+        Already have an account?{" "}
+        <span onClick={() => navigate("/login")}>Login</span>
       </p>
     </div>
   );

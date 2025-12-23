@@ -11,19 +11,22 @@ export default function AlphaPlan() {
 
   const plan = {
     name: "Alpha Trader",
-    dailyProfit: 3, // %
+    dailyProfit: 3,
     minInvestment: 500,
   };
 
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const res = await api.get("/user/me");
-        setBalance(res.data.balance);
+        const res = await api.get("/users/me");
+
+        const data = res.data.user || res.data;
+        setBalance(Number(data.balance || 0));
       } catch (err) {
-        console.error(err);
+        console.error("Balance error:", err);
       }
     };
+
     fetchBalance();
   }, []);
 
@@ -38,10 +41,13 @@ export default function AlphaPlan() {
         plan: plan.name,
         amount: Number(amount),
       });
+
       alert("Investment successful!");
       setAmount("");
-      const res = await api.get("/user/me");
-      setBalance(res.data.balance);
+
+      const res = await api.get("/users/me");
+      const data = res.data.user || res.data;
+      setBalance(Number(data.balance || 0));
     } catch (err) {
       console.error(err);
       alert("Investment failed!");

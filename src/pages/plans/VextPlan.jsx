@@ -11,19 +11,22 @@ export default function VextPlan() {
 
   const plan = {
     name: "VEXT Robot",
-    dailyProfit: 2, // %
+    dailyProfit: 2,
     minInvestment: 20,
   };
 
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const res = await api.get("/user/me");
-        setBalance(res.data.balance);
+        const res = await api.get("/users/me");
+
+        const data = res.data.user || res.data;
+        setBalance(Number(data.balance || 0));
       } catch (err) {
-        console.error(err);
+        console.error("Balance error:", err);
       }
     };
+
     fetchBalance();
   }, []);
 
@@ -38,10 +41,14 @@ export default function VextPlan() {
         plan: plan.name,
         amount: Number(amount),
       });
+
       alert("Investment successful!");
       setAmount("");
-      const res = await api.get("/user/me");
-      setBalance(res.data.balance);
+
+      // refresh balance
+      const res = await api.get("/users/me");
+      const data = res.data.user || res.data;
+      setBalance(Number(data.balance || 0));
     } catch (err) {
       console.error(err);
       alert("Investment failed!");

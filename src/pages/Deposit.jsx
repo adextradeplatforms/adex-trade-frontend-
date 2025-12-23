@@ -16,15 +16,17 @@ export default function Deposit() {
 
       // 1️⃣ Platform wallet
       const walletRes = await api.get("/wallets/platform");
-      setWallet(walletRes.data);
+      const walletData = walletRes.data.wallet || walletRes.data;
+      setWallet(walletData);
 
       // 2️⃣ User balance
       const userRes = await api.get("/users/me");
-      setBalance(userRes.data.balance || 0);
+      const userData = userRes.data.user || userRes.data;
+      setBalance(Number(userData.balance || 0));
 
       // 3️⃣ Deposit transactions
       const txRes = await api.get("/transactions?type=deposit");
-      setDeposits(txRes.data || []);
+      setDeposits(txRes.data.transactions || txRes.data || []);
 
       setError("");
     } catch (err) {
@@ -78,7 +80,7 @@ export default function Deposit() {
         ) : (
           deposits.map((d) => (
             <div key={d._id} className={`tx ${d.status}`}>
-              <span>${d.amount.toFixed(2)}</span>
+              <span>${Number(d.amount || 0).toFixed(2)}</span>
               <span>{d.status}</span>
               <span>{new Date(d.createdAt).toLocaleString()}</span>
             </div>

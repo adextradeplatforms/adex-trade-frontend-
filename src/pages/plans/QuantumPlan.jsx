@@ -11,20 +11,22 @@ export default function QuantumPlan() {
 
   const plan = {
     name: "Quantum Boost",
-    dailyProfit: 2.5, // %
+    dailyProfit: 2.5,
     minInvestment: 100,
   };
 
-  // Fetch user balance
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const res = await api.get("/user/me");
-        setBalance(res.data.balance);
+        const res = await api.get("/users/me");
+
+        const data = res.data.user || res.data;
+        setBalance(Number(data.balance || 0));
       } catch (err) {
-        console.error(err);
+        console.error("Balance error:", err);
       }
     };
+
     fetchBalance();
   }, []);
 
@@ -39,10 +41,13 @@ export default function QuantumPlan() {
         plan: plan.name,
         amount: Number(amount),
       });
+
       alert("Investment successful!");
       setAmount("");
-      const res = await api.get("/user/me");
-      setBalance(res.data.balance); // refresh balance
+
+      const res = await api.get("/users/me");
+      const data = res.data.user || res.data;
+      setBalance(Number(data.balance || 0));
     } catch (err) {
       console.error(err);
       alert("Investment failed!");
