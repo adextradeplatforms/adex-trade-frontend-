@@ -24,45 +24,110 @@ import AlphaPlan from "./pages/plans/AlphaPlan";
 
 export default function App() {
   return (
-    <Routes>
-      {/* Public Routes */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      {/* Protected App Routes */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <div className="page-wrapper">
-              <Routes>
-                {/* Dashboard & main pages */}
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="trade" element={<Trade />} />
-                <Route path="deposit" element={<Deposit />} />
-                <Route path="withdraw" element={<Withdraw />} />
-                <Route path="team" element={<Team />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="invite" element={<Invite />} />
-
-                {/* Plans */}
-                <Route path="plans/vext" element={<VextPlan />} />
-                <Route path="plans/quantum" element={<QuantumPlan />} />
-                <Route path="plans/alpha" element={<AlphaPlan />} />
-
-                {/* Fallback inside protected */}
-                <Route path="*" element={<Navigate to="/dashboard" replace />} />
-              </Routes>
-
-              {/* Bottom Navigation */}
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
               <BottomNavigator />
-            </div>
-          </ProtectedRoute>
-        }
-      />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/trade"
+          element={
+            <ProtectedRoute>
+              <Trade />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/deposit"
+          element={
+            <ProtectedRoute>
+              <Deposit />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/withdraw"
+          element={
+            <ProtectedRoute>
+              <Withdraw />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/team"
+          element={
+            <ProtectedRoute>
+              <Team />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/invite"
+          element={
+            <ProtectedRoute>
+              <Invite />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
 
-      {/* Fallback for unknown routes */}
-      <Route path="*" element={<Navigate to="/login" replace />} />
-    </Routes>
+        {/* Trade Plans */}
+        <Route
+          path="/plans/vext"
+          element={
+            <ProtectedRoute>
+              <VextPlan />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/plans/quantum"
+          element={
+            <ProtectedRoute>
+              <QuantumPlan />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/plans/alpha"
+          element={
+            <ProtectedRoute>
+              <AlphaPlan />
+              <BottomNavigator />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Default Redirects */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </>
   );
 }

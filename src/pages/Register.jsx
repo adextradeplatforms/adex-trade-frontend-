@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axios"; // ✅ use central axios instance
+import api from "../api/axios"; // ✅ centralized API instance
 import "./Auth.css";
 
 export default function Register() {
@@ -23,9 +23,12 @@ export default function Register() {
     setMessage("");
 
     try {
-      const res = await api.post("/auth/register", formData); // ✅ FIXED
-      setMessage(res.data.message || "Registration successful");
-      // navigate("/login"); // optional
+      const res = await api.post("/auth/register", formData);
+      const msg = res.data.message || "Registration successful";
+      setMessage(msg);
+
+      // Automatically redirect to login after 1.5s
+      setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
       setMessage(err.response?.data?.message || "Registration failed");
     } finally {
@@ -47,7 +50,6 @@ export default function Register() {
           onChange={handleChange}
           required
         />
-
         <input
           type="email"
           name="email"
@@ -56,7 +58,6 @@ export default function Register() {
           onChange={handleChange}
           required
         />
-
         <input
           type="password"
           name="password"
@@ -65,7 +66,6 @@ export default function Register() {
           onChange={handleChange}
           required
         />
-
         <button type="submit" disabled={loading}>
           {loading ? "Registering..." : "Register"}
         </button>

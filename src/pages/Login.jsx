@@ -20,14 +20,22 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
     try {
-      const res = await api.post("/auth/login", formData); // ✅ uses hosted backend
-      localStorage.setItem("token", res.data.token); // store JWT
-      setLoading(false);
-      navigate("/dashboard"); // redirect to Dashboard
+      const res = await api.post("/auth/login", formData); // use hosted backend
+      const token = res.data.token;
+
+      if (!token) throw new Error("No token returned from server");
+
+      localStorage.setItem("token", token); // store JWT
+
+      // small delay to ensure state updates before navigation
+      setTimeout(() => navigate("/dashboard"), 100);
     } catch (err) {
+      console.error("Login error:", err);
+      setMessage(err.response?.data?.message || "Invalid credentials");
+    } finally {
       setLoading(false);
-      setMessage(err.response?.data?.message || "Login failed");
     }
   };
 
@@ -57,7 +65,8 @@ export default function Login() {
         </button>
       </form>
       <p>
-        Don't have an account? <span onClick={() => navigate("/register")}>Register</span>
+        Don't have an account?{" "}
+        <span onClick={() => navigate("/register")}>Register</span>
       </p>
     </div>
   );

@@ -1,21 +1,16 @@
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setMessage("");
-  try {
-    const res = await api.post("/auth/login", formData);
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-    // Save token first
-    localStorage.setItem("token", res.data.token);
+// Wraps protected pages
+export default function ProtectedRoute({ children }) {
+  // Check if user token exists
+  const token = localStorage.getItem("token");
 
-    // Give a small delay to ensure token is stored before Dashboard fetch
-    setTimeout(() => {
-      navigate("/dashboard");
-    }, 50);
-
-  } catch (err) {
-    setMessage(err.response?.data?.message || "Login failed");
-  } finally {
-    setLoading(false);
+  if (!token) {
+    // Not logged in → redirect to login
+    return <Navigate to="/login" replace />;
   }
-};
+
+  // Logged in → render children
+  return children;
+}
